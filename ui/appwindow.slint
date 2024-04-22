@@ -1,0 +1,60 @@
+import { Button, VerticalBox, LineEdit } from "std-widgets.slint";
+
+export component AppWindow inherits Window {
+
+    in property <string> results: "";
+    callback divide_income(string);
+
+    background: #313350;
+    GridLayout {
+        padding: 50px;
+        spacing: 25px;
+        Row {
+            Text {
+                text: "Enter Total Income";
+                font-size: 20px;
+                font-weight: 900;
+                color: white;
+            }
+        }
+
+        Row {
+            income := LineEdit {
+                horizontal-alignment: center;
+                font-size: 14px;
+                width: 200px;
+                height: 25px;
+                placeholder-text: "Enter your number";
+            }
+        }
+
+        Row {
+            Button {
+                width: 209px;
+                height: 38px;
+                text: "Calculate";
+                clicked => {
+                    self.text = "Clicked";
+                    divide_income(income.text)
+                }
+                primary: true;
+            }
+        }
+
+        Row {
+            VerticalBox {
+                Rectangle {
+                    padding: 10px;
+                    height: 120px;
+                    background: #f2f2f2;
+                    Text {
+                        color: black;
+                        font-size: 1.7rem;
+                        font-weight: 500;
+                        text: root.results;
+                    }
+                }
+            }
+        }
+    }
+}
